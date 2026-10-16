@@ -12,14 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('dispositivos_red', function (Blueprint $table) {
-            $table->increments('dispositivos_red_id');
-            $table->foreignId('activo_id')->constrained('activos', 'activo_id')->nullable()->deferrable()->unique();
+            $table->id('dispositivos_red_id');
+            $table->foreignId('activo_id')->nullable()->unique()->constrained('activos', 'activo_id')->deferrable();
             $table->string('hostname', 150)->nullable();
             $table->string('direccion_ip', 100)->nullable();
             $table->string('direccion_mac', 100)->nullable();
-            $table->timestamp('created_at')->default('2026-10-15 15:52:50.934578');
-            $table->timestamp('updated_at')->nullable();
-            $table->timestamp('deleted_at')->nullable();
+            $table->timestamps();
+            $table->softDeletes();
 
             $table->index('direccion_ip');
             $table->index('direccion_mac');

@@ -12,11 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('activo_estado_fisico', function (Blueprint $table) {
-            $table->increments('activo_estado_fisico_id');
+            $table->id('activo_estado_fisico_id');
             $table->string('valor', 50)->nullable();
-            $table->timestamp('created_at')->default('2026-10-15 15:52:50.920112');
-            $table->timestamp('updated_at')->nullable();
-            $table->timestamp('deleted_at')->nullable();
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 

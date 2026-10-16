@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('computadoras', function (Blueprint $table) {
-            $table->increments('computadora_id');
-            $table->foreignId('activo_id')->constrained('activos', 'activo_id')->nullable()->deferrable()->unique();
+            $table->id('computadora_id');
+            $table->foreignId('activo_id')->nullable()->unique()->constrained('activos', 'activo_id')->deferrable();
             $table->string('hostname', 150)->nullable();
             $table->string('procesador', 50)->nullable();
             $table->string('memoria_ram', 50)->nullable();
@@ -23,9 +23,8 @@ return new class extends Migration
             $table->string('direccion_mac', 100)->nullable();
             $table->string('sistema_operativo', 100)->nullable();
             $table->string('version_so', 100)->nullable();
-            $table->timestamp('created_at')->default('2026-10-15 15:52:50.925642');
-            $table->timestamp('updated_at')->nullable();
-            $table->timestamp('deleted_at')->nullable();
+            $table->timestamps();
+            $table->softDeletes();
 
             $table->index('direccion_ip');
             $table->index('direccion_mac');

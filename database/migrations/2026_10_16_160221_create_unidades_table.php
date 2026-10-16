@@ -12,11 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('unidades', function (Blueprint $table) {
-            $table->increments('unidad_id');
+            $table->id('unidad_id');
             $table->string('nombre', 100)->nullable();
-            $table->timestamp('created_at')->useCurrent();
-            $table->timestamp('updated_at')->nullable();
-            $table->timestamp('deleted_at')->nullable();
+            $table->timestamps();
+            $table->softDeletes();
         });
     }
 
