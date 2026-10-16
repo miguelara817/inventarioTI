@@ -20,7 +20,7 @@ class ActivoResource extends Resource
 {
     protected static ?string $model = Activo::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedArchiveBox;
 
     public static function form(Schema $schema): Schema
     {

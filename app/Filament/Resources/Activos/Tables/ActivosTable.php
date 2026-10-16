@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Activos\Tables;
 
+use Filament\Actions\ActionGroup;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
@@ -19,6 +20,9 @@ class ActivosTable
     {
         return $table
             ->columns([
+                TextColumn::make('index')
+                    ->label('N.º')
+                    ->rowIndex(),
                 TextColumn::make('codigo_activo')
                     ->label('Código')
                     ->searchable()
@@ -74,8 +78,10 @@ class ActivosTable
                     ->relationship('estadoOperativo', 'nombre'),
             ])
             ->recordActions([
-                ViewAction::make(),
-                EditAction::make(),
+                ActionGroup::make([
+                    ViewAction::make(),
+                    EditAction::make(),
+                ])
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
