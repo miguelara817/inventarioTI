@@ -1,0 +1,20 @@
+services:
+  db:
+    container_name: inventarioTI_db
+    image: postgres:17-alpine
+    restart: unless-stopped
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: 12345678
+      POSTGRES_DB: inventarioDB
+    volumes:
+      # Volumen administrado por Docker: datos persistentes
+      - ./postgres_data_inventario:/var/lib/postgresql/data
+      # Bind mount: scripts SQL del proyecto
+      # - ./postgres/init:/docker-entrypoint-initdb.d:ro
+
+volumes:
+  postgres_data_inventario:
+    driver: local
