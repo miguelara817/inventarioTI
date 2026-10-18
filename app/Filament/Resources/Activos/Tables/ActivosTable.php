@@ -25,6 +25,7 @@ class ActivosTable
                     ->rowIndex(),
                 TextColumn::make('codigo_activo')
                     ->label('Código')
+                    ->copyable()
                     ->searchable()
                     ->sortable(),
                 TextColumn::make('tipo.nombre')
@@ -37,10 +38,12 @@ class ActivosTable
                     ->toggleable(),
                 TextColumn::make('modelo')
                     ->searchable()
+                    ->copyable()
                     ->sortable()
                     ->toggleable(),
                 TextColumn::make('numero_serie')
                     ->label('Nº Serie')
+                    ->copyable()
                     ->searchable()
                     ->toggleable(),
                 TextColumn::make('ubicacion.nombre')
@@ -55,8 +58,39 @@ class ActivosTable
                 TextColumn::make('estadoOperativo.nombre')
                     ->label('Estado Op.')
                     ->sortable()
+                    ->badge()
+                    ->color(fn (string $state): string => match ($state) {
+                        'Operativo' => 'success',
+                        'Operativo con observaciones' => 'info',
+                        'Con fallas' => 'warning',
+                        'Fuera de servicio' => 'danger',
+                        'No verificado' => 'gray'
+                    })
+                    ->toggleable(),
+                TextColumn::make('estadoAsignado.valor')
+                    ->label('Estado Asignado.')
+                    ->sortable()
+                    ->badge()
+                    ->color(fn (string $state): string => match ($state) {
+                        'Asignado' => 'info',
+                        'Disponible' => 'success',
+                        'En mantenimiento' => 'warning',
+                        'Dado de baja' => 'danger',
+                    })
+                    ->toggleable(),
+                TextColumn::make('estadoFisico.valor')
+                    ->label('Estado Asignado.')
+                    ->sortable()
+                    ->badge()
+                    ->color(fn (string $state): string => match ($state) {
+                        'Bueno' => 'success',
+                        'Regular' => 'warning',
+                        'Malo' => 'danger',
+                        'No verificado' => 'gray',
+                    })
                     ->toggleable(),
                 TextColumn::make('fecha_registro')
+                    ->label('Fecha de Registro')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(),
@@ -66,7 +100,7 @@ class ActivosTable
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                TrashedFilter::make(),
+                // TrashedFilter::make(),
                 SelectFilter::make('activo_tipo_id')
                     ->label('Tipo')
                     ->relationship('tipo', 'nombre'),
@@ -78,10 +112,14 @@ class ActivosTable
                     ->relationship('estadoOperativo', 'nombre'),
             ])
             ->recordActions([
-                ActionGroup::make([
-                    ViewAction::make(),
-                    EditAction::make(),
-                ])
+                // ActionGroup::make([
+                //     ViewAction::make(),
+                //     EditAction::make(),
+                // ]),
+                ViewAction::make()
+                    ->iconButton(),
+                EditAction::make()
+                    ->iconButton(),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

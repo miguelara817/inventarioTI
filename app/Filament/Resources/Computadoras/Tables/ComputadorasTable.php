@@ -24,37 +24,45 @@ class ComputadorasTable
                     ->rowIndex(),
                 TextColumn::make('activo.codigo_activo')
                     ->label('Código de activo')
+                    ->copyable()
                     ->toggleable(),
                 TextColumn::make('hostname')
                     ->label('Hostname')
+                    ->copyable()
                     ->toggleable(),
                 TextColumn::make('procesador')
                     ->label('Procesador')
+                    ->copyable()
                     ->toggleable(),
                 TextColumn::make('memoria_ram')
                     ->label('Memoria RAM')
+                    ->copyable()
                     ->toggleable(),
                 TextColumn::make('almacenamiento')
                     ->label('Almacenamiento')
+                    ->copyable()
                     ->toggleable(),
                 TextColumn::make('video')
                     ->label('Tarjeta de video')
+                    ->copyable()
                     ->toggleable(),
                 TextColumn::make('sistema_operativo')
+                    ->copyable()
                     ->label('SO')
                     ->toggleable(),
                 TextColumn::make('version_so')
                     ->label('Versio SO')
+                    ->copyable()
                     ->toggleable(),
             ])
             ->filters([
-                TrashedFilter::make(),
+                // TrashedFilter::make(),
             ])
             ->recordActions([
                 ActionGroup::make([
                     ViewAction::make(),
                     EditAction::make(),
-                ])
+                ]),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

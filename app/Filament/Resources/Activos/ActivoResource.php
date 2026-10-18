@@ -15,9 +15,20 @@ use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use UnitEnum;
 
 class ActivoResource extends Resource
 {
+    protected static ?string $navigationLabel = 'Activos TI';
+
+    protected static ?string $label = 'Activo TI';
+
+    protected static ?string $pluralLabel = 'Activos TI';
+
+    protected static ?string $slug = 'activosTI';
+
+    protected static string|UnitEnum|null $navigationGroup = 'Activos';
+
     protected static ?string $model = Activo::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedArchiveBox;

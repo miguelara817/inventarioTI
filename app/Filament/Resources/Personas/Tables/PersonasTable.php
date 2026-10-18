@@ -12,12 +12,10 @@ use Filament\Actions\RestoreBulkAction;
 use Filament\Actions\ViewAction;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Filters\Filter;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
-use Illuminate\Database\Query\Builder;
 
 class PersonasTable
 {
@@ -38,16 +36,16 @@ class PersonasTable
                     ->sortable(),
                 TextColumn::make('unidad.nombre')
                     ->label('Unidad')
-                    ->searchable()
+                    // ->searchable()
                     ->sortable(),
                 IconColumn::make('is_active')
                     ->label('Activo')
-                    ->boolean() 
-                    ->searchable()
+                    ->boolean()
+                    // ->searchable()
                     ->sortable(),
             ])
             ->filters([
-                TrashedFilter::make(),
+                // TrashedFilter::make(),
                 SelectFilter::make('unidad.nombre')
                     ->label('Unidad')
                     ->relationship('unidad', 'nombre'),
@@ -55,15 +53,21 @@ class PersonasTable
                     ->label('Estado')
                     ->placeholder('Todos')
                     ->trueLabel('Activos')
-                    ->falseLabel('Inactivos')
-                    
+                    ->falseLabel('Inactivos'),
+
             ])
             ->recordActions([
-                ActionGroup::make([
-                    ViewAction::make(),
-                    EditAction::make(),
-                    DeleteAction::make()
-                ])
+                // ActionGroup::make([
+                //     ViewAction::make(),
+                //     EditAction::make(),
+                //     DeleteAction::make()
+                // ])
+                ViewAction::make()
+                    ->iconButton(),
+                EditAction::make()
+                    ->iconButton(),
+                DeleteAction::make()
+                    ->iconButton(),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

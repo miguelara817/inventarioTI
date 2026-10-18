@@ -15,9 +15,12 @@ use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use UnitEnum;
 
 class ComputadoraResource extends Resource
 {
+    protected static string|UnitEnum|null $navigationGroup = 'Activos';
+
     protected static ?string $model = Computadora::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::ComputerDesktop;
