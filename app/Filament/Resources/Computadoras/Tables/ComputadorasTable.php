@@ -2,6 +2,9 @@
 
 namespace App\Filament\Resources\Computadoras\Tables;
 
+use App\Filament\Exports\ComputadoraExporter;
+use App\Filament\Reports\ReportActions;
+use App\Models\Computadora;
 use Filament\Actions\ActionGroup;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
@@ -25,39 +28,61 @@ class ComputadorasTable
                     ->rowIndex(),
                 TextColumn::make('activo.codigo_activo')
                     ->label('Código de activo')
-                    ->copyable()
-                    ->toggleable(),
+                    // ->copyable()
+                    ->toggleable()
+                    ->searchable(),
                 TextColumn::make('hostname')
                     ->label('Hostname')
-                    ->copyable()
+                    // ->copyable()
                     ->toggleable(),
                 TextColumn::make('procesador')
                     ->label('Procesador')
-                    ->copyable()
-                    ->toggleable(),
+                    // ->copyable()
+                    ->toggleable()
+                    ->searchable(),
                 TextColumn::make('memoria_ram')
                     ->label('Memoria RAM')
-                    ->copyable()
-                    ->toggleable(),
+                    // ->copyable()
+                    ->toggleable()
+                    ->searchable(),
                 TextColumn::make('almacenamiento')
                     ->label('Almacenamiento')
-                    ->copyable()
+                    // ->copyable()
                     ->toggleable(),
                 TextColumn::make('video')
                     ->label('Tarjeta de video')
-                    ->copyable()
+                    // ->copyable()
                     ->toggleable(),
                 TextColumn::make('sistema_operativo')
-                    ->copyable()
+                    // ->copyable()
                     ->label('SO')
                     ->toggleable(),
                 TextColumn::make('version_so')
                     ->label('Versio SO')
-                    ->copyable()
+                    // ->copyable()
                     ->toggleable(),
             ])
             ->filters([
                 // TrashedFilter::make(),
+            ])
+            ->headerActions([
+                ReportActions::make(
+                    exporter: ComputadoraExporter::class,
+                    title: 'Computadoras',
+                    columns: [
+                        'Código de activo' => fn (Computadora $computadora): ?string => $computadora->activo?->codigo_activo,
+                        'Hostname' => fn (Computadora $computadora): ?string => $computadora->hostname,
+                        'Procesador' => fn (Computadora $computadora): ?string => $computadora->procesador,
+                        'Memoria RAM' => fn (Computadora $computadora): ?string => $computadora->memoria_ram,
+                        'Almacenamiento' => fn (Computadora $computadora): ?string => $computadora->almacenamiento,
+                        'Tarjeta de video' => fn (Computadora $computadora): ?string => $computadora->video,
+                        'Dirección IP' => fn (Computadora $computadora): ?string => $computadora->direccion_ip,
+                        'Dirección MAC' => fn (Computadora $computadora): ?string => $computadora->direccion_mac,
+                        'Sistema operativo' => fn (Computadora $computadora): ?string => $computadora->sistema_operativo,
+                        'Versión del SO' => fn (Computadora $computadora): ?string => $computadora->version_so,
+                    ],
+                    with: ['activo'],
+                ),
             ])
             ->recordActions([
                 // ActionGroup::make([
@@ -69,7 +94,7 @@ class ComputadorasTable
                 EditAction::make()
                     ->iconButton(),
                 DeleteAction::make()
-                    ->iconButton()
+                    ->iconButton(),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

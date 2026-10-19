@@ -2,6 +2,9 @@
 
 namespace App\Filament\Resources\Personas\Tables;
 
+use App\Filament\Exports\PersonaExporter;
+use App\Filament\Reports\ReportActions;
+use App\Models\Persona;
 use Filament\Actions\ActionGroup;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
@@ -58,6 +61,20 @@ class PersonasTable
                     ->trueLabel('Activos')
                     ->falseLabel('Inactivos'),
 
+            ])
+            ->headerActions([
+                ReportActions::make(
+                    exporter: PersonaExporter::class,
+                    title: 'Personas',
+                    columns: [
+                        'Nombre' => fn (Persona $persona): ?string => $persona->nombre,
+                        'Apellido' => fn (Persona $persona): ?string => $persona->apellido,
+                        'Correo institucional' => fn (Persona $persona): ?string => $persona->email,
+                        'Unidad' => fn (Persona $persona): ?string => $persona->unidad?->nombre,
+                        'Activo' => fn (Persona $persona): string => $persona->is_active ? 'Sí' : 'No',
+                    ],
+                    with: ['unidad'],
+                ),
             ])
             ->recordActions([
                 // ActionGroup::make([

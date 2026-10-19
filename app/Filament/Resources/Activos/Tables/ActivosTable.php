@@ -2,6 +2,9 @@
 
 namespace App\Filament\Resources\Activos\Tables;
 
+use App\Filament\Exports\ActivoExporter;
+use App\Filament\Reports\ReportActions;
+use App\Models\Activo;
 use Filament\Actions\ActionGroup;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
@@ -112,6 +115,28 @@ class ActivosTable
                     ->label('Estado Operativo')
                     ->relationship('estadoOperativo', 'nombre'),
             ])
+            ->headerActions([
+                ReportActions::make(
+                    exporter: ActivoExporter::class,
+                    title: 'Activos TI',
+                    columns: [
+                        'Código' => fn (Activo $activo): ?string => $activo->codigo_activo,
+                        'Tipo' => fn (Activo $activo): ?string => $activo->tipo?->nombre,
+                        'Marca' => fn (Activo $activo): ?string => $activo->marca,
+                        'Modelo' => fn (Activo $activo): ?string => $activo->modelo,
+                        'N.º de serie' => fn (Activo $activo): ?string => $activo->numero_serie,
+                        'Ubicación' => fn (Activo $activo): ?string => $activo->ubicacion?->nombre,
+                        'Asignado a' => fn (Activo $activo): ?string => $activo->personaAsignada
+                            ? trim("{$activo->personaAsignada->nombre} {$activo->personaAsignada->apellido}")
+                            : null,
+                        'Estado operativo' => fn (Activo $activo): ?string => $activo->estadoOperativo?->nombre,
+                        'Estado asignado' => fn (Activo $activo): ?string => $activo->estadoAsignado?->valor,
+                        'Estado físico' => fn (Activo $activo): ?string => $activo->estadoFisico?->valor,
+                        'Fecha de registro' => fn (Activo $activo): ?string => $activo->fecha_registro?->format('d/m/Y'),
+                    ],
+                    with: ['tipo', 'ubicacion', 'personaAsignada', 'estadoOperativo', 'estadoAsignado', 'estadoFisico'],
+                ),
+            ])
             ->recordActions([
                 // ActionGroup::make([
                 //     ViewAction::make(),
@@ -123,7 +148,7 @@ class ActivosTable
                     ->slideOver()
                     ->iconButton(),
                 DeleteAction::make()
-                    ->iconButton()
+                    ->iconButton(),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

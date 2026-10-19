@@ -2,6 +2,9 @@
 
 namespace App\Filament\Resources\DispositivoReds\Tables;
 
+use App\Filament\Exports\DispositivoRedExporter;
+use App\Filament\Reports\ReportActions;
+use App\Models\DispositivoRed;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
@@ -23,30 +26,45 @@ class DispositivoRedsTable
                     ->label('N.º')
                     ->rowIndex(),
                 TextColumn::make('activo.codigo_activo')
-                    ->label('Código de activo')
-                    ->copyable()
-                    ->toggleable(),
+                    ->label('Código de activo'),
+                // ->copyable()
+                // ->toggleable(),
                 TextColumn::make('hostname')
-                    ->searchable(),
+                    ->toggleable(),
                 TextColumn::make('direccion_ip')
-                    ->searchable(),
+                    ->searchable()
+                    ->toggleable(),
                 TextColumn::make('direccion_mac')
-                    ->searchable(),
-                TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('deleted_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->searchable()
+                    ->toggleable(),
+                // TextColumn::make('created_at')
+                //     ->dateTime()
+                //     ->sortable()
+                //     ->toggleable(isToggledHiddenByDefault: true),
+                // TextColumn::make('updated_at')
+                //     ->dateTime()
+                //     ->sortable()
+                //     ->toggleable(isToggledHiddenByDefault: true),
+                // TextColumn::make('deleted_at')
+                //     ->dateTime()
+                //     ->sortable()
+                //     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 // TrashedFilter::make(),
+            ])
+            ->headerActions([
+                ReportActions::make(
+                    exporter: DispositivoRedExporter::class,
+                    title: 'Dispositivos de Red',
+                    columns: [
+                        'Código de activo' => fn (DispositivoRed $dispositivo): ?string => $dispositivo->activo?->codigo_activo,
+                        'Hostname' => fn (DispositivoRed $dispositivo): ?string => $dispositivo->hostname,
+                        'Dirección IP' => fn (DispositivoRed $dispositivo): ?string => $dispositivo->direccion_ip,
+                        'Dirección MAC' => fn (DispositivoRed $dispositivo): ?string => $dispositivo->direccion_mac,
+                    ],
+                    with: ['activo'],
+                ),
             ])
             ->recordActions([
                 ViewAction::make()
@@ -54,7 +72,7 @@ class DispositivoRedsTable
                 EditAction::make()
                     ->iconButton(),
                 DeleteAction::make()
-                    ->iconButton()
+                    ->iconButton(),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
