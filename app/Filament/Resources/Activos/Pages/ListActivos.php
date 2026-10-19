@@ -10,6 +10,9 @@ class ListActivos extends ListRecords
 {
     protected static string $resource = ActivoResource::class;
 
+    // Opciones disponibles: ExtraLarge, TwoExtraLarge, SixExtraLarge, Full, etc.
+    // protected ?MaxWidth $maxContentWidth = MaxWidth::Full; 
+
     protected function getHeaderActions(): array
     {
         return [

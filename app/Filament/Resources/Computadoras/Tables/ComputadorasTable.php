@@ -77,6 +77,8 @@ class ComputadorasTable
                     ForceDeleteBulkAction::make(),
                     RestoreBulkAction::make(),
                 ]),
-            ]);
+            ])
+            ->recordUrl(null)
+            ->recordAction(null);
     }
 }

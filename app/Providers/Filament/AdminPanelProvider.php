@@ -10,6 +10,7 @@ use Filament\Pages\Dashboard;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
+use Filament\Support\Enums\Width;
 use Filament\Widgets\AccountWidget;
 use Filament\Widgets\FilamentInfoWidget;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
@@ -28,14 +29,16 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->brandName('Inventario de TI')
-            // ->brandLogo(asset('images/inbolLogo.jpg'))
+            ->brandLogo(asset('images/inbolLogo.jpg'))
             // ->darkModeBrandLogo(asset('images/LOGO_INSUMOS-COLOR-01-scaled_3.png'))
-            // ->brandLogoHeight('5rem')
+            ->brandLogoHeight('5rem')
             ->favicon(asset('images/cropped-inbolico-32x32.png'))
             ->font('Montserrat')
-            ->darkMode(true)
+            ->darkMode(false)
             ->sidebarCollapsibleOnDesktop()
             ->login()
+            ->profile()
+            ->maxContentWidth(Width::Full)
             ->colors([
                 // 'primary' => Color::Blue[950],
                 'primary' => Color::hex('#243652'),

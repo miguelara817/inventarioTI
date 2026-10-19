@@ -26,7 +26,7 @@ class ActivosTable
                     ->rowIndex(),
                 TextColumn::make('codigo_activo')
                     ->label('Código')
-                    ->copyable()
+                    // ->copyable()
                     ->searchable()
                     ->sortable(),
                 TextColumn::make('tipo.nombre')
@@ -131,6 +131,8 @@ class ActivosTable
                     ForceDeleteBulkAction::make(),
                     RestoreBulkAction::make(),
                 ]),
-            ]);
+            ])
+            ->recordUrl(null)
+            ->recordAction(null);
     }
 }
