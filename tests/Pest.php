@@ -48,3 +48,14 @@ function something()
 {
     // ..
 }
+
+/**
+ * Invoca un método protegido o privado de un objeto para poder inspeccionar
+ * los datos que un widget calcula internamente.
+ *
+ * @param  array<int, mixed>  $arguments
+ */
+function invokeProtected(object $object, string $method, array $arguments = []): mixed
+{
+    return (fn (): mixed => $this->{$method}(...$arguments))->call($object);
+}
