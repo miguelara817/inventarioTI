@@ -116,6 +116,16 @@ return [
 
     ],
 
+    // 'conexion_secundaria' => [
+    //     'driver' => env('DB_SECONDARY_CONNECTION', 'mysql'),
+    //     'host' => env('DB_SECONDARY_HOST', '127.0.0.1'),
+    //     'port' => env('DB_SECONDARY_PORT', '3306'),
+    //     'database' => env('DB_SECONDARY_DATABASE', 'forge'),
+    //     'username' => env('DB_SECONDARY_USERNAME', 'forge'),
+    //     'password' => env('DB_SECONDARY_PASSWORD', ''),
+    //     // ... mantén el resto de propiedades idénticas a la conexión 'mysql'
+    // ],
+
     /*
     |--------------------------------------------------------------------------
     | Migration Repository Table
