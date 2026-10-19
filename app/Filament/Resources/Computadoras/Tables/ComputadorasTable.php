@@ -4,6 +4,7 @@ namespace App\Filament\Resources\Computadoras\Tables;
 
 use Filament\Actions\ActionGroup;
 use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ForceDeleteBulkAction;
@@ -59,10 +60,16 @@ class ComputadorasTable
                 // TrashedFilter::make(),
             ])
             ->recordActions([
-                ActionGroup::make([
-                    ViewAction::make(),
-                    EditAction::make(),
-                ]),
+                // ActionGroup::make([
+                //     ViewAction::make(),
+                //     EditAction::make(),
+                // ]),
+                ViewAction::make()
+                    ->iconButton(),
+                EditAction::make()
+                    ->iconButton(),
+                DeleteAction::make()
+                    ->iconButton()
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

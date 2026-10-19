@@ -4,6 +4,7 @@ namespace App\Filament\Resources\Activos\Tables;
 
 use Filament\Actions\ActionGroup;
 use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ForceDeleteBulkAction;
@@ -119,7 +120,10 @@ class ActivosTable
                 ViewAction::make()
                     ->iconButton(),
                 EditAction::make()
+                    ->slideOver()
                     ->iconButton(),
+                DeleteAction::make()
+                    ->iconButton()
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

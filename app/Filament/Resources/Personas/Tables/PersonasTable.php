@@ -34,6 +34,9 @@ class PersonasTable
                     ->label('Apellido')
                     ->searchable()
                     ->sortable(),
+                TextColumn::make('email')
+                    ->label('Correo Institucional')
+                    ->searchable(),
                 TextColumn::make('unidad.nombre')
                     ->label('Unidad')
                     // ->searchable()

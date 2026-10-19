@@ -47,6 +47,15 @@ class PersonaForm
                     ->label('Apellido')
                     ->required()
                     ->maxLength(50),
+                TextInput::make('email')
+                    ->label('Correo Institucional')
+                    ->email()
+                    ->required()
+                    ->maxLength(150)
+                    ->unique(table: 'personas', column: 'email')
+                    ->validationMessages([
+                        'unique' => 'El correo ya está registrado'
+                    ]),
                 Select::make('unidad_id')
                     ->label('Unidad')
                     ->relationship('unidad', 'nombre')

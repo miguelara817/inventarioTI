@@ -17,6 +17,10 @@ class ComputadoraForm
                     ->label('Activo')
                     ->relationship('activo', 'codigo_activo')
                     ->options(Activo::all()->pluck('codigo_activo', 'activo_id'))
+                    ->unique(table: 'computadoras', column:'activo_id')
+                    ->validationMessages([
+                        'unique' => 'El activo ya esta registrado'
+                    ])
                     ->searchable()
                     ->preload(),
                 TextInput::make('hostname')
