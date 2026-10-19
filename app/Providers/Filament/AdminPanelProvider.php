@@ -32,7 +32,7 @@ class AdminPanelProvider extends PanelProvider
             ->brandLogoHeight('5rem')
             ->favicon(asset('images/cropped-inbolico-32x32.png'))
             ->font('Montserrat')
-            ->darkMode(false)
+            ->darkMode(true)
             ->sidebarCollapsibleOnDesktop()
             ->login()
             ->databaseNotifications()

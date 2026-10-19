@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Builder;
 
 class ActivosCriticos extends TableWidget
 {
-    protected static ?int $sort = 7;
+    protected static ?int $sort = 8;
 
     protected int|string|array $columnSpan = 1;
 

@@ -5,6 +5,7 @@ use App\Filament\Widgets\ActivosCriticos;
 use App\Filament\Widgets\ActivosPorEstadoAsignadoChart;
 use App\Filament\Widgets\ActivosPorEstadoOperativoChart;
 use App\Filament\Widgets\ActivosPorTipoChart;
+use App\Filament\Widgets\ActivosPorUnidadChart;
 use App\Filament\Widgets\ActivosStatsOverview;
 use App\Filament\Widgets\AltasPorMesChart;
 use App\Filament\Widgets\UltimosActivosRegistrados;
@@ -139,6 +140,15 @@ it('agrupa los activos por estado de asignación en el gráfico', function () {
         ->and($data['datasets'][0]['data'])->toBe([1, 1, 1, 0, 1]);
 });
 
+it('agrupa los activos por unidad organizativa en el gráfico', function () {
+    crearActivosDeDashboard($this);
+
+    $data = invokeProtected(new ActivosPorUnidadChart, 'getData');
+
+    expect($data['labels'])->toBe(['Jefatura de Sistemas', 'Sin unidad'])
+        ->and($data['datasets'][0]['data'])->toBe([1, 3]);
+});
+
 it('cuenta las altas de los últimos doce meses', function () {
     crearActivosDeDashboard($this);
 
@@ -169,6 +179,7 @@ it('renderiza cada widget del dashboard sin errores', function () {
 
     Livewire::test(ActivosStatsOverview::class)->assertOk();
     Livewire::test(ActivosPorTipoChart::class)->assertOk();
+    Livewire::test(ActivosPorUnidadChart::class)->assertOk();
     Livewire::test(ActivosPorEstadoOperativoChart::class)->assertOk();
     Livewire::test(ActivosPorEstadoAsignadoChart::class)->assertOk();
     Livewire::test(AltasPorMesChart::class)->assertOk();

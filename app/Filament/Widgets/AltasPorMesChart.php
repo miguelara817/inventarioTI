@@ -7,13 +7,15 @@ use Filament\Widgets\ChartWidget;
 
 class AltasPorMesChart extends ChartWidget
 {
-    protected static ?int $sort = 5;
+    protected static ?int $sort = 6;
 
     protected ?string $heading = 'Altas por mes';
 
     protected ?string $description = 'Activos registrados en los últimos 12 meses.';
 
     protected ?string $pollingInterval = null;
+
+    protected int|string|array $columnSpan = 'full';
 
     /**
      * @return array<string, mixed>
