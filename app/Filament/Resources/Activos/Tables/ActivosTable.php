@@ -60,7 +60,7 @@ class ActivosTable
                     ->searchable()
                     ->toggleable(),
                 TextColumn::make('estadoOperativo.nombre')
-                    ->label('Estado Op.')
+                    ->label('Estado Operativo')
                     ->sortable()
                     ->badge()
                     ->color(fn (string $state): string => match ($state) {
@@ -83,7 +83,7 @@ class ActivosTable
                     })
                     ->toggleable(),
                 TextColumn::make('estadoFisico.valor')
-                    ->label('Estado Asignado.')
+                    ->label('Estado Físico.')
                     ->sortable()
                     ->badge()
                     ->color(fn (string $state): string => match ($state) {
@@ -108,12 +108,18 @@ class ActivosTable
                 SelectFilter::make('activo_tipo_id')
                     ->label('Tipo')
                     ->relationship('tipo', 'nombre'),
-                SelectFilter::make('ubicacion_id')
-                    ->label('Ubicación')
-                    ->relationship('ubicacion', 'nombre'),
+                // SelectFilter::make('ubicacion_id')
+                //     ->label('Ubicación')
+                //     ->relationship('ubicacion', 'nombre'),
                 SelectFilter::make('estado_operativo')
                     ->label('Estado Operativo')
                     ->relationship('estadoOperativo', 'nombre'),
+                SelectFilter::make('estado_asignado')
+                    ->label('Estado Asignado')
+                    ->relationship('estadoAsignado', 'valor'),
+                SelectFilter::make('estado_fisico')
+                    ->label('Estado Físico')
+                    ->relationship('estadoFisico', 'valor'),
             ])
             ->headerActions([
                 ReportActions::make(

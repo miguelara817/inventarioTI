@@ -204,7 +204,7 @@
             ? 'data:image/jpeg;base64,'.base64_encode(file_get_contents($logoFile))
             : null;
 
-        $institution = 'INBOL';
+        $institution = 'Insumos Bolivia';
     @endphp
 
     {{-- ====================================================================
