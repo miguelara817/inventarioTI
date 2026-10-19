@@ -30,7 +30,7 @@ class DispositivoRedResource extends Resource
     protected static string|UnitEnum|null $navigationGroup = 'Activos';
     protected static ?string $model = DispositivoRed::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::Printer;
 
     protected static ?string $recordTitleAttribute = 'DispositivoRed';
 
