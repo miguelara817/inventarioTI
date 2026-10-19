@@ -8,6 +8,8 @@ use App\Models\ActivoEstadoOperativo;
 use App\Models\ActivoTipo;
 use App\Models\Ubicacion;
 use Filament\Forms\Components\DateTimePicker;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
@@ -22,7 +24,8 @@ class ActivoForm
                 TextInput::make('codigo_activo')
                     ->label('Código de Activo')
                     ->required()
-                    ->maxLength(100),
+                    ->maxLength(100)
+                    ->alphaDash(),
                 Select::make('activo_tipo_id')
                     ->label('Tipo de Activo')
                     ->relationship('tipo', 'nombre')
@@ -68,9 +71,17 @@ class ActivoForm
                     ->preload(),
                 DateTimePicker::make('fecha_registro')
                     ->default(now()),
+                // RichEditor::make(),
                 Textarea::make('observaciones')
                     ->rows(3)
                     ->columnSpanFull(),
+                // FileUpload::make('image')
+                //     ->label('Imagen del activo')
+                //     ->disk('public')
+                //     ->directory('activos')
+                //     ->image()
+                //     ->acceptedFileTypes(['image/*'])
+                //     ->maxSize(2048),
             ]);
     }
 }

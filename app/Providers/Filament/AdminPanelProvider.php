@@ -27,9 +27,19 @@ class AdminPanelProvider extends PanelProvider
             ->default()
             ->id('admin')
             ->path('admin')
+            ->brandName('Inventario de TI')
+            // ->brandLogo(asset('images/inbolLogo.jpg'))
+            // ->darkModeBrandLogo(asset('images/LOGO_INSUMOS-COLOR-01-scaled_3.png'))
+            // ->brandLogoHeight('5rem')
+            ->favicon(asset('images/cropped-inbolico-32x32.png'))
+            ->font('Montserrat')
+            ->darkMode(true)
+            ->sidebarCollapsibleOnDesktop()
             ->login()
             ->colors([
-                'primary' => Color::Amber,
+                // 'primary' => Color::Blue[950],
+                'primary' => Color::hex('#243652'),
+                'gray' => Color::Slate,
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')

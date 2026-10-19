@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id('persona_id');
             $table->string('nombre', 50)->nullable();
             $table->string('apellido', 50)->nullable();
+            $table->string('email', 150)->unique();
             $table->foreignId('unidad_id')->nullable()->constrained('unidades', 'unidad_id')->deferrable();
             $table->boolean('is_active')->default(true)->notNull();
             $table->timestamps();

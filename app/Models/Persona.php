@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-#[Fillable(['nombre', 'apellido', 'unidad_id', 'is_active'])]
+#[Fillable(['nombre', 'apellido', 'email', 'unidad_id', 'is_active'])]
 class Persona extends Model
 {
     use SoftDeletes;

@@ -15,9 +15,12 @@ use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use UnitEnum;
 
 class PersonaResource extends Resource
 {
+    protected static string|UnitEnum|null $navigationGroup = 'Administración';
+
     protected static ?string $model = Persona::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::User;
